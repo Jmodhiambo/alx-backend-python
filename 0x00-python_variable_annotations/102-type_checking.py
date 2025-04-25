@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+"""Validating zoom_array to ensure it passes mypy check"""
 from typing import Tuple, List
 
 
 def zoom_array(lst: Tuple, factor: int = 2) -> List:
+    """The function to be validated."""
     zoomed_in: Tuple = [
         item for item in lst
         for i in range(factor)

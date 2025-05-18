@@ -84,19 +84,6 @@ class TestGithubOrgClient(unittest.TestCase):
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
 
-    def test_public_repos(self):
-        """Test public_repos method without license filter"""
-        client = GithubOrgClient("test_org")
-        self.assertEqual(client.public_repos(), self.expected_repos)
-
-    def test_public_repos_with_license(self):
-        """Test public_repos method with license filter 'apache-2.0'"""
-        client = GithubOrgClient("test_org")
-        self.assertEqual(
-            client.public_repos(license="apache-2.0"),
-            self.apache2_repos
-        )
-
 
 @parameterized_class([
     {
@@ -129,3 +116,16 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     def tearDownClass(cls):
         """Stop patcher."""
         cls.get_patcher.stop()
+
+    def test_public_repos(self):
+        """Test public_repos method without license filter"""
+        client = GithubOrgClient("test_org")
+        self.assertEqual(client.public_repos(), self.expected_repos)
+
+    def test_public_repos_with_license(self):
+        """Test public_repos method with license filter 'apache-2.0'"""
+        client = GithubOrgClient("test_org")
+        self.assertEqual(
+            client.public_repos(license="apache-2.0"),
+            self.apache2_repos
+        )

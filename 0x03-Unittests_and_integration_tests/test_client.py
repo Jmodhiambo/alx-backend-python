@@ -73,3 +73,12 @@ class TestGithubOrgClient(unittest.TestCase):
 
             # Ensure both mocked methods were called once
             mock_get_json.assert_called_once()
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False),
+    ])
+    def test_has_license(self, repo, license_key, expected):
+        """Test has_license static method with parameterized inputs"""
+        result = GithubOrgClient.has_license(repo, license_key)
+        self.assertEqual(result, expected)
